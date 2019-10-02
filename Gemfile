@@ -9,3 +9,23 @@ gem 'fastri'
 
 gem 'sinatra'
 gem 'sinatra-contrib'
+
+gem 'rake'
+gem 'sinatra-activerecord'
+gem 'activerecord', '5.2.3'
+gem 'bcrypt'
+
+gem 'dotenv'
+gem 'json'
+
+group :development, :test do
+  gem 'pry', '~> 0.10.4'
+end
+
+group :development, :test do
+  gem 'sqlite3', '1.4.1'
+end
+
+group :production do
+  gem 'pg', '0.21.0'
+end
