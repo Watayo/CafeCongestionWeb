@@ -1,0 +1,18 @@
+<div>
+  <%if !current_user.nil? %>
+    <p><%= current_user.name %>さん</p>
+    <p><a href="/signout">ログアウト</a></p>
+  <% else %>
+    <form action="/signin" method="post">
+      <div>
+        <input name="name" placeholder="ユーザーネーム"><br>
+        <input name="password" type="password" placeholder="パスワード"><br>
+      </div>
+      <div>
+        <input type="submit" value="ログイン">
+      </div>
+    </form>
+    <li>新規ユーザーかな？？</li>
+    <li><a href="/signup">新規登録</li>
+  <% end %>
+</div>

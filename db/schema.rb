@@ -16,15 +16,6 @@ ActiveRecord::Schema.define(version: 2019_10_02_052124) do
     t.string "name"
   end
 
-  create_table "cafe_users", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "cafe_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cafe_id"], name: "index_cafe_users_on_cafe_id"
-    t.index ["user_id"], name: "index_cafe_users_on_user_id"
-  end
-
   create_table "cafes", force: :cascade do |t|
     t.string "cafe_name"
     t.integer "seat_num"
@@ -36,13 +27,22 @@ ActiveRecord::Schema.define(version: 2019_10_02_052124) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "passwoed_digest"
+    t.string "password_digest"
     t.integer "good_num"
     t.string "Thanks"
     t.integer "area_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["area_id"], name: "index_users_on_area_id"
+  end
+
+  create_table "users_cafes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "cafe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cafe_id"], name: "index_users_cafes_on_cafe_id"
+    t.index ["user_id"], name: "index_users_cafes_on_user_id"
   end
 
 end
