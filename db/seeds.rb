@@ -1,4 +1,4 @@
-Area.seed(:id,
+Area.create!(
   { :id => 0, :name => "北海道" },
   { :id => 1, :name => "青森県" },
   { :id => 2, :name => "岩手県" },
