@@ -18,5 +18,12 @@
   <% if !current_user.nil? %>
     <h2>地域を選択してください</h2>
     <!--ここに選択できる都道府県を羅列-->
+    <% @areas.each do |area| %>
+     <!--seed値がおかしい-->
+      <form action="/areas/<%= area.id %>" method="post">
+        <input type="submit" value="<%= area.name %>">
+      </form>
+    <% end %>
 
+  <% end %>
 </div>

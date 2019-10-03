@@ -11,6 +11,7 @@ helpers do
   def current_user
     User.find_by(id: session[:user])
   end
+
 end
 
 get '/' do
@@ -21,6 +22,7 @@ get '/signup' do
   erb :sign_up
 end
 
+
 post '/signup' do
   user = User.create(
     name: params[:name],
@@ -30,22 +32,31 @@ post '/signup' do
   if user.persisted?
     session[:user] = user.id
   end
-  erb :user_page
+   redirect '/userpage'
 end
 
 post '/signin' do
   user = User.find_by(name: params[:name])
   if user && user.authenticate(params[:password])
     session[:user] = user.id
-    erb :user_page
+    redirect '/userpage'
   else
-    redirect '/firstpage'
+    redirect '/'
   end
-
-
 end
 
 get '/signout' do
   session[:user] = nil
-  erb :firstpage
+  redirect '/'
+end
+
+get '/userpage' do
+  @areas = Area.all
+  erb :user_page
+end
+
+
+post '/area/:id' do
+  #@area = Area.find(params[:id])
+  redirect '/cafe_lists'
 end
