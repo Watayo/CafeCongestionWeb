@@ -18,6 +18,9 @@ gem 'bcrypt'
 gem 'dotenv'
 gem 'json'
 
+
+gem 'seed-fu', '~> 2.3'
+
 group :development, :test do
   gem 'pry', '~> 0.10.4'
 end

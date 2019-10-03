@@ -7,4 +7,14 @@ end
 
 class User < ActiveRecord::Base
   has_secure_password
+  belongs_to :area
+end
+
+class Area < ActiveRecord::Base
+  has_many :user
+  has_many :cafe
+end
+
+class Cafe < ActiveRecord::Base
+  belongs_to :area
 end

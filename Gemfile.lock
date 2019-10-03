@@ -55,6 +55,9 @@ GEM
     ruby-debug-ide (0.6.1)
       rake (>= 0.8.1)
     ruby-progressbar (1.10.0)
+    seed-fu (2.3.9)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
     sinatra (2.0.5)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -94,6 +97,7 @@ DEPENDENCIES
   rcodetools
   rubocop
   ruby-debug-ide
+  seed-fu (~> 2.3)
   sinatra
   sinatra-activerecord
   sinatra-contrib
