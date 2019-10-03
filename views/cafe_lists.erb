@@ -2,4 +2,28 @@
   <div>
     <h3><%= @area.name %>のカフェ</h3>
   </div>
+  <div><!--カフェ投稿フォーム-->
+    <form action="/cafepost/<%= @area.id %>" method="post">
+      <div>
+        <input name="cafename" placeholder="カフェの名前">
+        <input name="cafeplace" placeholder="カフェの場所">
+        <input name="seatnum" type="number" placeholder="席数">
+      </div>
+      <div>
+        <input type="submit" value="あなたの見つけたカフェを登録">
+      </div>
+    </form>
+  </div>
+  <div>
+    <% if !@cafes.nil? %>
+      <ul>
+        <% @cafes.each do |cafe| %>
+          <li>名前：<%= cafe.cafe_name %></li>
+          <li>場所：<%= cafe.cafe_place %></li>
+          <li>席数：<%= cafe.seat_num %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
 </div>

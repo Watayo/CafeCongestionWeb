@@ -55,8 +55,23 @@ get '/userpage' do
   erb :user_page
 end
 
+post '/areas/:id' do
+  @area = Area.find(params[:id])
+  #@areaをcafe_listsに渡す
+  erb :cafe_lists
+end
 
-post '/area/:id' do
-  #@area = Area.find(params[:id])
-  redirect '/cafe_lists'
+get '/cafelist' do
+  @cafes = Cafe.all
+  erb :cafe_lists
+end
+
+post '/cafepost/:id' do
+  area = Area.find(params[:id])
+  area.cafe.create(
+    cafe_name: params[:cafename],
+    seat_num: params[:seatnum],
+    cafe_place: params[:cafeplace]
+  )
+  redirect '/cafelist'
 end

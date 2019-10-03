@@ -3,6 +3,7 @@ class CreateCafes < ActiveRecord::Migration[5.2]
     create_table :cafes do |t|
       t.string :cafe_name
       t.integer :seat_num
+      t.string :cafe_place
       t.references :area
       t.timestamps null: false
     end

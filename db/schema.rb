@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2019_10_02_052124) do
   create_table "cafes", force: :cascade do |t|
     t.string "cafe_name"
     t.integer "seat_num"
+    t.string "cafe_place"
     t.integer "area_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
