@@ -1,0 +1,17 @@
+<div>
+  <div>
+    <div>
+      <form action="/caves/<%= @cafe.id %>" method="post">
+        <div>
+          <input type="text" name="cafename" placeholder="カフェの名前" value="<%= CGI.escapeHTML(@cafe.cafe_name) %>"><br>
+          <input type="text" name="cafeplace"
+          value="<%= CGI.escapeHTML(@cafe.cafe_place) %>"><br>
+          <input type="number" name="seatnum" value="<%= @cafe.seat_num %>"><br>
+        </div>
+        <div>
+          <input type="submit" value="送信">
+        </div>
+    </div>
+      </form>
+  </div>
+</div>

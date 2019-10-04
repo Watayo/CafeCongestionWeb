@@ -11,6 +11,9 @@ helpers do
   def current_user
     User.find_by(id: session[:user])
   end
+  def current_area
+    Area.find_by(id: session[:area])
+  end
 
 end
 
@@ -56,27 +59,46 @@ get '/userpage' do
 end
 
 post '/areas/:id' do
-  @area = Area.find(params[:id])
+  area = Area.find(params[:id])
+  session[:area] = area.id
   #@areaをcafe_listsに渡す
-  erb :cafe_lists
+  redirect '/cafelists'
 end
 
-# get '/cafelist' do
-#   @caves = Cafe.all
-
-#   erb :cafe_lists
-# end
+get '/cafelists' do
+  @caves = Cafe.all
+  erb :cafe_lists
+ end
 
 post '/cafepost/:id' do
   #binding.pry
-  area = Area.find(params[:id])
   #binding.pry
   area.cafe.create(
     cafe_name: params[:cafename],
     cafe_place: params[:cafeplace],
     seat_num: params[:seatnum].to_i
   )
-  @area = area
-  @caves = Cafe.all
-  erb :cafe_lists
+  #@cafe = Cafe.all
+  #@area = area
+  redirect '/cafelists'
+end
+
+get '/caves/:id/edit' do
+  @cafe = Cafe.find(params[:id])
+  erb :edit
+end
+
+post '/caves/:id' do
+  cafe = Cafe.find(params[:id])
+  cafe.cafe_name = params[:cafename]
+  cafe.cafe_place = params[:cafeplace]
+  cafe.seat_num = params[:seatnum]
+  cafe.save
+  redirect '/cafelists'
+end
+
+post '/caves/:id/delete' do
+  cafe = Cafe.find(params[:id])
+  cafe.destroy
+  redirect '/cafelists'
 end

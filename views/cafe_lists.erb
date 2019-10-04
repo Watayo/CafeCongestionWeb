@@ -1,9 +1,9 @@
 <div>
   <div>
-    <h3><%= @area.name %>のカフェ</h3>
+    <h3><%= current_area.name %>のカフェ</h3>
   </div>
   <div><!--カフェ投稿フォーム-->
-    <form action="/cafepost/<%= @area.id %>" method="post">
+    <form action="/cafepost/<%= current_area.id %>" method="post">
       <div>
         <input name="cafename" placeholder="カフェの名前">
         <input name="cafeplace" placeholder="カフェの場所">
@@ -21,6 +21,13 @@
           <li>名前：<%= cafe.cafe_name %></li>
           <li>場所：<%= cafe.cafe_place %></li>
           <li>席数：<%= cafe.seat_num %></li>
+          <form action="/caves/<%= cafe.id %>/delete" method="post">
+            <input type="submit" value="削除">
+          </form>
+          <td>
+          <a href="/caves/<%= cafe.id %>/edit">編集</a></td>
+          <br>
+
         <% end %>
       </ul>
     <% end %>
