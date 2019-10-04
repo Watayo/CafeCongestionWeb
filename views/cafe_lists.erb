@@ -15,9 +15,9 @@
     </form>
   </div>
   <div>
-    <% if !@cafes.nil? %>
+    <% if !@caves.nil? %>
       <ul>
-        <% @cafes.each do |cafe| %>
+        <% @caves.each do |cafe| %>
           <li>名前：<%= cafe.cafe_name %></li>
           <li>場所：<%= cafe.cafe_place %></li>
           <li>席数：<%= cafe.seat_num %></li>

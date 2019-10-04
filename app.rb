@@ -1,7 +1,7 @@
 require 'bundler/setup'
 Bundler.require
 require 'sinatra/reloader' if development?
-
+require 'pry'
 require 'sinatra/activerecord'
 require './models'
 
@@ -61,17 +61,22 @@ post '/areas/:id' do
   erb :cafe_lists
 end
 
-get '/cafelist' do
-  @cafes = Cafe.all
-  erb :cafe_lists
-end
+# get '/cafelist' do
+#   @caves = Cafe.all
+
+#   erb :cafe_lists
+# end
 
 post '/cafepost/:id' do
+  #binding.pry
   area = Area.find(params[:id])
+  #binding.pry
   area.cafe.create(
     cafe_name: params[:cafename],
-    seat_num: params[:seatnum],
-    cafe_place: params[:cafeplace]
+    cafe_place: params[:cafeplace],
+    seat_num: params[:seatnum].to_i
   )
-  redirect '/cafelist'
+  @area = area
+  @caves = Cafe.all
+  erb :cafe_lists
 end

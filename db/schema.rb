@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_02_052124) do
+ActiveRecord::Schema.define(version: 2019_10_04_095939) do
 
   create_table "areas", force: :cascade do |t|
     t.string "name"
   end
 
-  create_table "cafes", force: :cascade do |t|
+  create_table "caves", force: :cascade do |t|
     t.string "cafe_name"
-    t.integer "seat_num"
     t.string "cafe_place"
+    t.integer "seat_num"
     t.integer "area_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["area_id"], name: "index_cafes_on_area_id"
+    t.index ["area_id"], name: "index_caves_on_area_id"
   end
 
   create_table "users", force: :cascade do |t|
