@@ -77,7 +77,7 @@ get '/cafelists' do
 post '/cafepost/:id' do
   #binding.pry
   #binding.pry
-  current_area.cafe.create(
+  current_area.caves.create(
     cafe_name: params[:cafename],
     cafe_place: params[:cafeplace],
     seat_num: params[:seatnum].to_i
@@ -123,6 +123,15 @@ post '/cafecongestion' do
   current_cafe.update(
     congestion: params[:congestion]
   )
+  #binding.pry
   erb :cafe_now
+end
+
+post '/cafe_go_out' do
+  #binding.pry
+  #@username = current_user.name
+
+  #ちょっと中間テーブルやばい
+  go_out_time = params[:go_out]
   #binding.pry
 end

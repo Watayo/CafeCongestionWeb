@@ -1,7 +1,21 @@
 <div>
+
   <div>
     <h2><%= current_cafe.cafe_name %>に今いるよ！</h2>
   </div>
+
+  <div>
+    何時に出るか決まってる？
+    <form action="/cafe_go_out" method="post">
+      <input type="time" name="go_out">
+      <input type="submit" value="決定">
+    </form>
+
+      <!--分入れたくないんだけどとりあえずまぁいいか。
+      なんか、iQueryつかえばいい感じになるっぽい-->
+    </form>
+  </div>
+
   <div>
     <form action="/cafecongestion" method="post">
       <p>
@@ -13,9 +27,14 @@
       </p>
       <p><input type="submit" value="送信する"></p>
   </div>
+
   <div>
     <p>現在の混雑具合 : <%= current_cafe.congestion %></p>
+  </div>
 
+  <div>
+    <p>出ようとしてる人達</p>
+    <p>行こうとしてる人達</p>
   </div>
 
 </div>
