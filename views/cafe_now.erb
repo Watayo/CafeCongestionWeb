@@ -1,0 +1,21 @@
+<div>
+  <div>
+    <h2><%= current_cafe.cafe_name %>に今いるよ！</h2>
+  </div>
+  <div>
+    <form action="/cafecongestion" method="post">
+      <p>
+        <select name="congestion">
+        <option value="満席&並んでる">満席&並んでる</option>
+        <option value="ほぼ満席">ほぼ満席</option>
+        <option value="狙い目">狙い目</option>
+        <option value="空席&リラックス">空席&リラックス</option>
+      </p>
+      <p><input type="submit" value="送信する"></p>
+  </div>
+  <div>
+    <p>現在の混雑具合 : <%= current_cafe.congestion %></p>
+
+  </div>
+
+</div>

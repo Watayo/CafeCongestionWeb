@@ -11,10 +11,14 @@ helpers do
   def current_user
     User.find_by(id: session[:user])
   end
+
   def current_area
     Area.find_by(id: session[:area])
   end
 
+  def current_cafe
+    Cafe.find_by(id: session[:cafe])
+  end
 end
 
 get '/' do
@@ -73,7 +77,7 @@ get '/cafelists' do
 post '/cafepost/:id' do
   #binding.pry
   #binding.pry
-  area.cafe.create(
+  current_area.cafe.create(
     cafe_name: params[:cafename],
     cafe_place: params[:cafeplace],
     seat_num: params[:seatnum].to_i
@@ -101,4 +105,24 @@ post '/caves/:id/delete' do
   cafe = Cafe.find(params[:id])
   cafe.destroy
   redirect '/cafelists'
+end
+
+get '/caves/:id/want' do
+  cafe = Cafe.find(params[:id])
+  session[:cafe] = cafe.id
+  erb :cafe_want
+end
+
+get '/caves/:id/now' do
+  cafe = Cafe.find(params[:id])
+  session[:cafe] = cafe.id
+  erb :cafe_now
+end
+
+post '/cafecongestion' do
+  current_cafe.update(
+    congestion: params[:congestion]
+  )
+  erb :cafe_now
+  #binding.pry
 end

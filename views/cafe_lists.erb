@@ -24,10 +24,10 @@
           <form action="/caves/<%= cafe.id %>/delete" method="post">
             <input type="submit" value="削除">
           </form>
-          <td>
-          <a href="/caves/<%= cafe.id %>/edit">編集</a></td>
+          <a href="/caves/<%= cafe.id %>/edit">編集</a>
+          <a href="/caves/<%= cafe.id %>/want">ここに行きたい!!</a>
+          <a href="/caves/<%= cafe.id %>/now">ここに今いる!!</a>
           <br>
-
         <% end %>
       </ul>
     <% end %>

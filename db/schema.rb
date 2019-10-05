@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2019_10_04_095939) do
     t.string "cafe_name"
     t.string "cafe_place"
     t.integer "seat_num"
+    t.string "congestion"
     t.integer "area_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
