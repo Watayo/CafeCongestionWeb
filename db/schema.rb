@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_04_095939) do
+ActiveRecord::Schema.define(version: 2019_10_06_060442) do
 
   create_table "areas", force: :cascade do |t|
     t.string "name"
@@ -27,24 +27,26 @@ ActiveRecord::Schema.define(version: 2019_10_04_095939) do
     t.index ["area_id"], name: "index_caves_on_area_id"
   end
 
+  create_table "user_caves", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "cafe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cafe_id"], name: "index_user_caves_on_cafe_id"
+    t.index ["user_id"], name: "index_user_caves_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
     t.integer "good_num"
     t.string "Thanks"
+    t.string "out_time"
+    t.string "go_time"
     t.integer "area_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["area_id"], name: "index_users_on_area_id"
-  end
-
-  create_table "users_cafes", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "cafe_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cafe_id"], name: "index_users_cafes_on_cafe_id"
-    t.index ["user_id"], name: "index_users_cafes_on_user_id"
   end
 
 end

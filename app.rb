@@ -19,6 +19,7 @@ helpers do
   def current_cafe
     Cafe.find_by(id: session[:cafe])
   end
+
 end
 
 get '/' do
@@ -116,11 +117,14 @@ end
 get '/caves/:id/now' do
   cafe = Cafe.find(params[:id])
   session[:cafe] = cafe.id
+  #
+
+  #
   erb :cafe_now
 end
 
 post '/cafecongestion' do
-  current_cafe.update(
+  current_cafe.create(
     congestion: params[:congestion]
   )
   #binding.pry
@@ -128,10 +132,20 @@ post '/cafecongestion' do
 end
 
 post '/cafe_go_out' do
-  #binding.pry
-  #@username = current_user.name
-
   #ちょっと中間テーブルやばい
-  go_out_time = params[:go_out]
+  #go_out_time = params[:go_out]
+  current_user.update(
+    out_time: params[:go_out]
+  )
+
+  #binding.pry
+  relation = UserCafe.create(
+    user_id: current_user.id,
+    cafe_id: current_cafe.id
+  )
+  #中間テーブルを使って、格納したい
+  #binding.pry
+  @out_users.push(User.find_by(id: relation.user_id))
+  erb :cafe_now
   #binding.pry
 end

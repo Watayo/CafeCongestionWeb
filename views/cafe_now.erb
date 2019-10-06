@@ -34,6 +34,15 @@
 
   <div>
     <p>出ようとしてる人達</p>
+      <% if !@out_users.nil? %>
+      <ul>
+        <% @out_users.each do |out_user| %>
+          <li><%= out_user.name %>さん ： <%= out_user.out_time %></li>
+        <% end %>
+      </ul>
+      <% end %>
+  </div>
+  <div>
     <p>行こうとしてる人達</p>
   </div>
 

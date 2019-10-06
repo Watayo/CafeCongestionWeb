@@ -5,6 +5,8 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :password_digest
       t.integer :good_num
       t.string :Thanks
+      t.string :out_time
+      t.string :go_time
       t.references :area
       t.timestamps null: false
     end
