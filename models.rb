@@ -7,8 +7,8 @@ end
 
 class User < ActiveRecord::Base
   has_secure_password
-  has_many :caves, through: :user_caves
   has_many :user_caves, dependent: :destroy
+  has_many :caves, through: :user_caves
   belongs_to :area
 
 end
@@ -19,8 +19,8 @@ class Area < ActiveRecord::Base
 end
 
 class Cafe < ActiveRecord::Base
-  has_many :users, through: :user_caves
   has_many :user_caves, dependent: :destroy
+  has_many :users, through: :user_caves
   belongs_to :area
 end
 

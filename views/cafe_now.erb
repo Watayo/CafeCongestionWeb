@@ -44,6 +44,13 @@
   </div>
   <div>
     <p>行こうとしてる人達</p>
+      <% if !@go_users.nil? %>
+      <ul>
+        <% @go_users.each do |go_user| %>
+          <li><%= go_user.name %>さん ： <%= go_user.go_time %></li>
+        <% end %>
+      </ul>
+      <% end %>
   </div>
 
 </div>

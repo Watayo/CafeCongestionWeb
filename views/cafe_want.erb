@@ -2,8 +2,37 @@
   <div>
     <h2><%= current_cafe.cafe_name %>に行きたい！</h2>
   </div>
+
   <div>
     <p>現在の混雑具合 : <%= current_cafe.congestion %></p>
   </div>
 
+  <div>
+    <p>出ようとしてる人達</p>
+    <% if !@out_users.nil? %>
+      <ul>
+        <% @out_users.each do |out_user| %>
+          <li><%= out_user.name %>さん ： <%= out_user.out_time %></li>
+        <% end %>
+      </ul>
+      <% end %>
+  </div>
+  <div>
+    <p>行こうとしてる人</p>
+    <% if !@go_users.nil? %>
+      <ul>
+        <% @go_users.each do |go_user| %>
+          <li><%= go_user.name %>さん ： <%= go_user.go_time %></li>
+        <% end %>
+      </ul>
+      <% end %>
+  </div>
+
+  <div>
+    何時にいきたい？？
+    <form action="/cafe_go" method="post">
+      <input type="time" name="go">
+      <input type="submit" value="決定">
+    </form>
+  </div>
 </div>

@@ -111,20 +111,36 @@ end
 get '/caves/:id/want' do
   cafe = Cafe.find(params[:id])
   session[:cafe] = cafe.id
+  @out_users = current_cafe.users.where.not(out_time: nil)
+  @go_users = current_cafe.users.where.not(go_time: nil)
+  erb :cafe_want
+end
+
+post '/cafe_go' do
+  current_user.update(
+    go_time: params[:go]
+  )
+
+  UserCafe.create(
+    user_id: current_user.id,
+    cafe_id: current_cafe.id
+  )
+  @go_users = current_cafe.users.where.not(go_time: nil)
+  @out_users = current_cafe.users.where.not(out_time: nil)
+##KONOカフェに行きたい人の配列にぶち込みたい
   erb :cafe_want
 end
 
 get '/caves/:id/now' do
   cafe = Cafe.find(params[:id])
   session[:cafe] = cafe.id
-  #
-
-  #
+  @out_users = current_cafe.users.where.not(out_time: nil)
+  @go_users = current_cafe.users.where.not(go_time: nil)
   erb :cafe_now
 end
 
 post '/cafecongestion' do
-  current_cafe.create(
+  current_cafe.update(
     congestion: params[:congestion]
   )
   #binding.pry
@@ -132,20 +148,17 @@ post '/cafecongestion' do
 end
 
 post '/cafe_go_out' do
-  #ちょっと中間テーブルやばい
-  #go_out_time = params[:go_out]
   current_user.update(
     out_time: params[:go_out]
   )
-
   #binding.pry
-  relation = UserCafe.create(
+  UserCafe.create(
     user_id: current_user.id,
     cafe_id: current_cafe.id
   )
-  #中間テーブルを使って、格納したい
-  #binding.pry
-  @out_users.push(User.find_by(id: relation.user_id))
+  #上によってこのような関係が使える
+  @go_users = current_cafe.users.where.not(go_time: nil)
+  @out_users = current_cafe.users.where.not(out_time: nil)
+
   erb :cafe_now
-  #binding.pry
 end
