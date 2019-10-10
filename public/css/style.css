@@ -1,0 +1,8 @@
+/* 全体 */
+body {
+    /* 背景画像　*/
+    background-image: url(../images/kabe.jpg);
+
+    /* 背景画像のサイズ */
+    background-size: cover;
+}

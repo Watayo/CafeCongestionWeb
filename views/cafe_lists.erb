@@ -14,10 +14,12 @@
       </div>
     </form>
   </div>
+
   <div>
     <% if !@caves.nil? %>
-      <ul>
         <% @caves.each do |cafe| %>
+        <div class="card">
+        <ul>
           <li>名前：<%= cafe.cafe_name %></li>
           <li>場所：<%= cafe.cafe_place %></li>
           <li>席数：<%= cafe.seat_num %></li>
@@ -28,8 +30,9 @@
           <a href="/caves/<%= cafe.id %>/want">ここに行きたい!!</a>
           <a href="/caves/<%= cafe.id %>/now">ここに今いる!!</a>
           <br>
+        </ul>
+        </div>
         <% end %>
-      </ul>
     <% end %>
   </div>
 

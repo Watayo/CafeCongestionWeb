@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_10_06_060442) do
     t.string "Thanks"
     t.string "out_time"
     t.string "go_time"
+    t.date "date"
     t.integer "area_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

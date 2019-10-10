@@ -58,6 +58,9 @@ get '/signout' do
   redirect '/'
 end
 
+get '/home' do
+  erb :user_page
+end
 get '/userpage' do
   @areas = Area.all
   erb :user_page
@@ -121,6 +124,9 @@ post '/cafe_go' do
     go_time: params[:go]
   )
 
+  current_user.out_time = nil
+  current_user.save
+
   UserCafe.create(
     user_id: current_user.id,
     cafe_id: current_cafe.id
@@ -151,6 +157,8 @@ post '/cafe_go_out' do
   current_user.update(
     out_time: params[:go_out]
   )
+  current_user.go_time = nil
+  current_user.save
   #binding.pry
   UserCafe.create(
     user_id: current_user.id,
