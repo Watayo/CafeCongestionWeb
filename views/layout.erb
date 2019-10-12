@@ -2,18 +2,66 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta property="og:image" content="http://localhost:32783/images/logo.png"/>
+  <!-- <meta property="og:image" content="http://Assets/images/logo.png"/> -->
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Raleway:400,300,700,900" rel="stylesheet">
 
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!-- Bootstrap CSS File -->
+  <link href="./Assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="./Assets/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="./Assets/css/style.css">
+
 </head>
-<body>
-<div class="container">
-<a href="/home">ホーム</a>
-<%= yield %>
+<body data-spy="scroll" data-offset="80" data-target="#thenavbar">
+<div id="thenavbar" class="navbar navbar-default navbar-fixed-top">
+
+  <div class="container">
+
+    <div class="navbar-collapse collapse">
+      <% if !current_user.nil? %>
+          <div class="navbar-header">
+            <h4><%= current_user.name %>さん</h4>
+          </div>
+      <% end %>
+      <ul class="nav navbar-nav navbar-right">
+          <li class="active">
+            <a href="/" class="smoothscroll">Home</a>
+          </li>
+        <% if !current_user.nil? %>
+          <li>
+            <a href="/signout" class="smoothscroll">Logout</a>
+          </li>
+        <% end %>
+          <li>
+            <a href="/signup" class="smoothscroll">SignUp</a>
+          </li>
+          <li>
+            <a href="/signin" class="smoothscroll">LogIn</a>
+          </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
 </div>
+<!--<img src="/Assets/images/logo.png" width="1450" height="300">-->
+<div id="hello">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 centered">
+        <h1>Cafe SNS</h1>
+        <h2>Let's take a coffee break, shall we??</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= yield %>
+
 </body>
 </html>

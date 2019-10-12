@@ -18,7 +18,7 @@ gem 'bcrypt'
 gem 'dotenv'
 gem 'json'
 
-
+gem 'tzinfo-data'
 
 
 group :development, :test do

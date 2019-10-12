@@ -1,24 +1,26 @@
-<div>
-  <div>
-    <h3><%= current_area.name %>のカフェ</h3>
+<div class="container">
+  <div class="row">
+
   </div>
-  <div><!--カフェ投稿フォーム-->
+  <div class="col-lg-12 centered"> <!--カフェ投稿フォーム-->
+    <h1><%= current_area.name %>のカフェ</h1>
     <form action="/cafepost/<%= current_area.id %>" method="post">
-      <div>
+      <div class="form-group">
         <input name="cafename" placeholder="カフェの名前">
         <input name="cafeplace" placeholder="カフェの場所">
         <input name="seatnum" type="number" placeholder="席数">
       </div>
-      <div>
-        <input type="submit" value="あなたの見つけたカフェを登録">
+      <div class="form-send">
+        <button type="submit" class="btn btn-large">あなたの見つけたカフェを登録</button>
       </div>
     </form>
   </div>
-
-  <div>
+  <p></p>
+  <div class="row centerd mt gird">
+  <div class="mt"></div>
     <% if !@caves.nil? %>
-        <% @caves.each do |cafe| %>
-        <div class="card">
+      <% @caves.each do |cafe| %>
+        <div class="col-lg-4">
         <ul>
           <li>名前：<%= cafe.cafe_name %></li>
           <li>場所：<%= cafe.cafe_place %></li>
@@ -26,13 +28,14 @@
           <form action="/caves/<%= cafe.id %>/delete" method="post">
             <input type="submit" value="削除">
           </form>
+
           <a href="/caves/<%= cafe.id %>/edit">編集</a>
           <a href="/caves/<%= cafe.id %>/want">ここに行きたい!!</a>
           <a href="/caves/<%= cafe.id %>/now">ここに今いる!!</a>
           <br>
         </ul>
         </div>
-        <% end %>
+      <% end %>
     <% end %>
   </div>
 

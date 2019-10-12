@@ -1,22 +1,26 @@
-<div>
+<div class="container">
 
-  <div>
+  <div class="row">
+    <div class="col-lg-8 centerd">
     <h2><%= current_cafe.cafe_name %>に今いるよ！</h2>
+    </div>
+
+  <div class="col-lg-8 centerd">
+    <h3>現在の混雑具合 : <%= current_cafe.congestion %></h3>
   </div>
 
-  <div>
-    何時に出るか決まってる？
+
+  <div class="col-mt-8 centerd">
+    <h2>何時に出るか決まってる？</h2>
     <form action="/cafe_go_out" method="post">
       <input type="time" name="go_out">
       <input type="submit" value="決定">
     </form>
-
       <!--分入れたくないんだけどとりあえずまぁいいか。
       なんか、iQueryつかえばいい感じになるっぽい-->
-    </form>
   </div>
 
-  <div>
+  <div class="col-mt-8 centerd">
     <form action="/cafecongestion" method="post">
       <p>
         <select name="congestion">
@@ -28,28 +32,30 @@
       <p><input type="submit" value="送信する"></p>
   </div>
 
-  <div>
-    <p>現在の混雑具合 : <%= current_cafe.congestion %></p>
-  </div>
-
-  <div>
-    <p>出ようとしてる人達</p>
+  <div class="row centerd mt grid">
+  <div class="mt"></div>
+    <h2>出ようとしてる人達</h2>
       <% if !@out_users.nil? %>
+      <div class="col-lg-4">
       <ul>
         <% @out_users.each do |out_user| %>
           <li><%= out_user.name %>さん ： <%= out_user.out_time %></li>
         <% end %>
       </ul>
+      </div>
       <% end %>
   </div>
-  <div>
-    <p>行こうとしてる人達</p>
+  <div class="row centerd mt grid">
+  <div class="mt"></div>
+    <h2>行こうとしてる人達</h2>
       <% if !@go_users.nil? %>
+      <div class="col-lg-4">
       <ul>
         <% @go_users.each do |go_user| %>
           <li><%= go_user.name %>さん ： <%= go_user.go_time %></li>
         <% end %>
       </ul>
+      </div>
       <% end %>
   </div>
 

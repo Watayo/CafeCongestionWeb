@@ -4,6 +4,8 @@ require 'sinatra/reloader' if development?
 require 'pry'
 require 'sinatra/activerecord'
 require './models'
+require 'date'
+require 'time'
 
 enable :sessions
 
@@ -20,6 +22,11 @@ helpers do
     Cafe.find_by(id: session[:cafe])
   end
 
+  def format_date(date)
+    jst_datetime = date.in_time_zone('Tokyo')
+
+  end
+
 end
 
 get '/' do
@@ -30,6 +37,9 @@ get '/signup' do
   erb :sign_up
 end
 
+get '/signin' do
+  erb :sign_in
+end
 
 post '/signup' do
   user = User.create(
@@ -59,8 +69,9 @@ get '/signout' do
 end
 
 get '/home' do
-  erb :user_page
+  erb :firstpage
 end
+
 get '/userpage' do
   @areas = Area.all
   erb :user_page
@@ -114,14 +125,15 @@ end
 get '/caves/:id/want' do
   cafe = Cafe.find(params[:id])
   session[:cafe] = cafe.id
-  @out_users = current_cafe.users.where.not(out_time: nil)
-  @go_users = current_cafe.users.where.not(go_time: nil)
+  @out_users = current_cafe.users.where.not(out_time: nil).limit(5).order("updated_at desc")
+  @go_users = current_cafe.users.where.not(go_time: nil).limit(5).order("updated_at desc")
   erb :cafe_want
 end
 
 post '/cafe_go' do
   current_user.update(
-    go_time: params[:go]
+    go_time: params[:go],
+    date: format_date(Date.today)
   )
 
   current_user.out_time = nil
@@ -131,8 +143,20 @@ post '/cafe_go' do
     user_id: current_user.id,
     cafe_id: current_cafe.id
   )
-  @go_users = current_cafe.users.where.not(go_time: nil)
-  @out_users = current_cafe.users.where.not(out_time: nil)
+  @go_users = current_cafe.users.where.not(go_time: nil).limit(5).order("updated_at desc")
+  # @go_users.each do |go_user|
+  #   if (go_user.date - format_date(Date.today)) < 0
+  #     go_user.destroy
+  #     go_user.save
+  #   end
+  # end
+  @out_users = current_cafe.users.where.not(out_time: nil).limit(5).order("updated_at desc")
+  # @out_users.each do |out_user|
+  #   if (out_user.date - format_date(Date.today)) < 0
+  #     out_user.destroy
+  #     out_user.save
+  #   end
+  # end
 ##KONOカフェに行きたい人の配列にぶち込みたい
   erb :cafe_want
 end
@@ -140,8 +164,23 @@ end
 get '/caves/:id/now' do
   cafe = Cafe.find(params[:id])
   session[:cafe] = cafe.id
-  @out_users = current_cafe.users.where.not(out_time: nil)
-  @go_users = current_cafe.users.where.not(go_time: nil)
+  @out_users = current_cafe.users.where.not(out_time: nil).limit(5).order("updated_at desc")
+  @go_users = current_cafe.users.where.not(go_time: nil).limit(5).order("updated_at desc")
+  # @out_users = current_cafe.users.where.not(out_time: nil)
+  # @out_users.each do |out_user|
+  #   if (out_user.date - format_date(Date.today)) < 0
+  #     out_user.destroy
+  #     out_user.save
+  #   end
+  # end
+  # @go_users = current_cafe.users.where.not(go_time: nil)
+  # @go_users.each do |go_user|
+  #   if (go_user.date - format_date(Date.today)) < 0
+  #     go_user.destroy
+  #     go_user.save
+  #   end
+  # end
+
   erb :cafe_now
 end
 
@@ -155,8 +194,11 @@ end
 
 post '/cafe_go_out' do
   current_user.update(
-    out_time: params[:go_out]
+    out_time: params[:go_out],
+    date: Date.today
   )
+
+
   current_user.go_time = nil
   current_user.save
   #binding.pry
@@ -165,8 +207,19 @@ post '/cafe_go_out' do
     cafe_id: current_cafe.id
   )
   #上によってこのような関係が使える
-  @go_users = current_cafe.users.where.not(go_time: nil)
-  @out_users = current_cafe.users.where.not(out_time: nil)
-
+  @out_users = current_cafe.users.where.not(out_time: nil).limit(5).order("updated_at desc")
+  # @out_users.each do |out_user|
+  #   if (out_user.date - format_date(Date.today)) < 0
+  #     out_user.destroy
+  #     out_user.save
+  #   end
+  # end
+  @go_users = current_cafe.users.where.not(go_time: nil).limit(5).order("updated_at desc")
+  # @go_users.each do |go_user|
+  #   if (go_user.date - format_date(Date.today)) < 0
+  #     go_user.destroy
+  #     go_user.save
+  #   end
+  # end
   erb :cafe_now
 end

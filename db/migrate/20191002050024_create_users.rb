@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :Thanks
       t.string :out_time
       t.string :go_time
-      t.date :date
+      t.datetime :date
       t.references :area
       t.timestamps null: false
     end

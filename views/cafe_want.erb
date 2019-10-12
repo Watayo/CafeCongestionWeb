@@ -1,38 +1,46 @@
-<div>
-  <div>
-    <h2><%= current_cafe.cafe_name %>に行きたい！</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 centerd">
+      <h2><%= current_cafe.cafe_name %>に行きたい！</h2>
+    </div>
+
+  <div class="col-mt-8 centerd">
+    <h2>現在の混雑具合 : <%= current_cafe.congestion %></h2>
   </div>
 
-  <div>
-    <p>現在の混雑具合 : <%= current_cafe.congestion %></p>
-  </div>
-
-  <div>
-    <p>出ようとしてる人達</p>
-    <% if !@out_users.nil? %>
+  <div class="row centerd mt grid">
+  <div class="mt"></div>
+    <h2>出ようとしてる人達</h2>
+      <% if !@out_users.nil? %>
+      <div class="col-lg-4">
       <ul>
         <% @out_users.each do |out_user| %>
           <li><%= out_user.name %>さん ： <%= out_user.out_time %></li>
         <% end %>
       </ul>
+      </div>
       <% end %>
   </div>
-  <div>
-    <p>行こうとしてる人</p>
-    <% if !@go_users.nil? %>
+  <div class="row centerd mt grid">
+  <div class="mt"></div>
+    <h2>行こうとしてる人達</h2>
+      <% if !@go_users.nil? %>
+      <div class="col-lg-4">
       <ul>
         <% @go_users.each do |go_user| %>
           <li><%= go_user.name %>さん ： <%= go_user.go_time %></li>
         <% end %>
       </ul>
+      </div>
       <% end %>
   </div>
 
-  <div>
-    何時にいきたい？？
+  <div class="col-mt-8 centerd">
+    <h2>何時にいきたい？？</h2>
     <form action="/cafe_go" method="post">
       <input type="time" name="go">
       <input type="submit" value="決定">
     </form>
   </div>
+
 </div>
