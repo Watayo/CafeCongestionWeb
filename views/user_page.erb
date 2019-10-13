@@ -7,7 +7,7 @@
         <% @areas.each do |area| %>
          <!--seed値がおかしい-->
           <form action="/areas/<%= area.id %>" method="post">
-            <button type="submit" class="btn btn-large">
+            <button type="submit" class="btn-thema">
             <%= area.name %></button>
           </form>
         <% end %>
