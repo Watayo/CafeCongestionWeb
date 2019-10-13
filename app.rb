@@ -1,7 +1,7 @@
 require 'bundler/setup'
 Bundler.require
 require 'sinatra/reloader' if development?
-require 'pry'
+#require 'pry'
 require 'sinatra/activerecord'
 require './models'
 require 'date'
