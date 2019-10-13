@@ -188,6 +188,8 @@ post '/cafecongestion' do
   current_cafe.update(
     congestion: params[:congestion]
   )
+  @out_users = current_cafe.users.where.not(out_time: nil).limit(5).order("updated_at desc")
+  @go_users = current_cafe.users.where.not(go_time: nil).limit(5).order("updated_at desc")
   #binding.pry
   erb :cafe_now
 end
